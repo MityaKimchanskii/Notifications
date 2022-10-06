@@ -18,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3B87172B28EF63990000D309 /* Huli Pizza Notification.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Huli Pizza Notification.entitlements"; sourceTree = "<group>"; };
 		E17C65FE21A88C54006DB476 /* Huli Pizza Notification.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Huli Pizza Notification.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E17C660121A88C54006DB476 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E17C660321A88C54006DB476 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -60,6 +61,7 @@
 		E17C660021A88C54006DB476 /* Huli Pizza Notification */ = {
 			isa = PBXGroup;
 			children = (
+				3B87172B28EF63990000D309 /* Huli Pizza Notification.entitlements */,
 				E17C660521A88C54006DB476 /* Main.storyboard */,
 				E17C660121A88C54006DB476 /* AppDelegate.swift */,
 				E17C661521A88D0B006DB476 /* NotificationCenterDelegate.swift */,
@@ -305,6 +307,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Huli Pizza Notification/Huli Pizza Notification.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G3VP62JDQQ;
@@ -325,6 +328,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Huli Pizza Notification/Huli Pizza Notification.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G3VP62JDQQ;

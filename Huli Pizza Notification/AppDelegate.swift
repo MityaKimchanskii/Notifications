@@ -16,6 +16,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     let ncDelegate = NotificationCenterDelegate()
     
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        // todo: Add code here
+        print(tokenString(deviceToken))
+    }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        printError(error, location: "Remote Notification Registration")
+    }
+    
     func setCategories() {
         
         let nextStepAction = UNNotificationAction(identifier: "next.Step", title: "Next", options: [])
@@ -39,6 +48,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
             self.printError(error, location: "Request Authorization")
+            
+            if granted {
+                DispatchQueue.main.async {
+                    application.registerForRemoteNotifications()
+                }
+            }
         }
         
         UNUserNotificationCenter.current().delegate = ncDelegate
