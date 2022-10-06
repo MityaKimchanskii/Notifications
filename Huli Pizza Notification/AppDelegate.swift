@@ -2,8 +2,8 @@
 //  AppDelegate.swift
 //  Huli Pizza Notification
 //
-//  Created by Steven Lipton on 11/23/18.
-//  Copyright © 2018 Steven Lipton. All rights reserved.
+//  Created by Dmitrii Kim on 9/27/22.
+//  Copyright © 2022 Dmitrii Kim. All rights reserved.
 //
 
 import UIKit

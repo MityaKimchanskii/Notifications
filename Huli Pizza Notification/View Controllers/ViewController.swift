@@ -2,8 +2,8 @@
 //  ViewController.swift
 //  Huli Pizza Notification
 //
-//  Created by Steven Lipton on 11/23/18.
-//  Copyright © 2018 Steven Lipton. All rights reserved.
+//  Created by Dmitrii Kim on 9/27/22.
+//  Copyright © 2022 Dmitrii Kim. All rights reserved.
 //
 
 import UIKit
@@ -35,13 +35,14 @@ class ViewController: UIViewController {
             
             let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
             
-            let identifier = "message.scheduled"
+            let identifier = "message.scheduled.\(Date().timeIntervalSinceReferenceDate)"
             self.addNotification(trigger: trigger, content: content, identifier: identifier)
         }
         
     }
     
     
+    var pizzaNumber = 0
     @IBAction func makePizza(_ sender: UIButton) {
         UNUserNotificationCenter.current().getNotificationSettings { settings in
             let status = settings.authorizationStatus
@@ -52,10 +53,14 @@ class ViewController: UIViewController {
                 return
             }
 //            self.introNotification()
+            self.pizzaNumber += 1
+            
             let content = self.notificationContent(title: "A timed pizza step", body: "Making Pizza!")
+            content.subtitle = "Pizza #\(self.pizzaNumber)"
+            
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10.0, repeats: false)
             
-            let identifier = "message.pizza"
+            let identifier = "message.pizza.\(self.pizzaNumber)"
             self.addNotification(trigger: trigger, content: content, identifier: identifier)
         }
         

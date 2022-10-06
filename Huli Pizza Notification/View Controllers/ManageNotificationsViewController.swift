@@ -2,8 +2,8 @@
 //  ManageNotificationsViewController.swift
 //  HuliPizzaNotifications
 //
-//  Created by Steven Lipton on 9/27/18.
-//  Copyright © 2018 Steven Lipton. All rights reserved.
+//  Created by Dmitrii Kim on 9/27/22.
+//  Copyright © 2022 Dmitrii Kim. All rights reserved.
 //
 
 import UIKit
@@ -22,11 +22,23 @@ class ManageNotificationsViewController: UIViewController{
     }
     
     @IBAction func viewPendingNotifications(_ sender: UIButton) {
-        
+        UNUserNotificationCenter.current().getPendingNotificationRequests { request in
+            self.printRequest(count: request.count, type: "pending")
+            
+            for request in request {
+                self.printConsoleView("\(request.identifier): \(request.content.body)\n")
+            }
+        }
     }
     
     @IBAction func viewDeliveredNotifications(_ sender: UIButton) {
-       
+        UNUserNotificationCenter.current().getDeliveredNotifications { notifications in
+            self.printRequest(count: notifications.count, type: "delivered")
+            
+            for notification in notifications {
+                self.printConsoleView("\(notification.request.identifier): \(notification.request.content.body)\n")
+            }
+        }
     }
     
     @IBAction func removeAllNotifications(_ sender: UITapGestureRecognizer) {
