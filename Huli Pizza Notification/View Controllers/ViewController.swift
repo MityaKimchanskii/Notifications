@@ -29,6 +29,7 @@ class ViewController: UIViewController {
             let content = UNMutableNotificationContent()
             content.title = "A Schedual Pizza"
             content.body = "Time to make a pizza!"
+            content.threadIdentifier = "scheduled"
             
             var dateComponents = Calendar.current.dateComponents([.hour, .minute, .second], from: Date())
             dateComponents.second = dateComponents.second! + 15
@@ -41,8 +42,8 @@ class ViewController: UIViewController {
         
     }
     
-    
     var pizzaNumber = 0
+    
     @IBAction func makePizza(_ sender: UIButton) {
         UNUserNotificationCenter.current().getNotificationSettings { settings in
             let status = settings.authorizationStatus
@@ -57,8 +58,10 @@ class ViewController: UIViewController {
             
             let content = self.notificationContent(title: "A timed pizza step", body: "Making Pizza!")
             content.subtitle = "Pizza #\(self.pizzaNumber)"
+            content.threadIdentifier = "make.pizza"
             
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10.0, repeats: false)
+//            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: true)
             
             let identifier = "message.pizza.\(self.pizzaNumber)"
             self.addNotification(trigger: trigger, content: content, identifier: identifier)

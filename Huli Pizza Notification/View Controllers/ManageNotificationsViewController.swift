@@ -42,15 +42,55 @@ class ManageNotificationsViewController: UIViewController{
     }
     
     @IBAction func removeAllNotifications(_ sender: UITapGestureRecognizer) {
-       
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
     }
     
     @IBAction func removeNotification(_ sender: UIButton) {
-        
+        UNUserNotificationCenter.current().getPendingNotificationRequests { request in
+            if let request = request.first(where: { request in
+                request.trigger?.repeats == true
+            }) {
+                UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [request.identifier])
+            }
+        }
     }
     
     @IBAction func nextPizzaStep(_ sender: UIButton) {
+        UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
+            for request in requests {
+                if request.identifier.hasPrefix("message.pizza") {
+                    guard let content = self.updatePizzaContent(request: request) else {
+                        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [request.identifier])
+                        return
+                    }
+                    self.addNotification(trigger: request
+                        .trigger, content: content, identifier: request.identifier)
+                    return
+                }
+            }
+        }
+    }
+    
+    func updatePizzaContent(request: UNNotificationRequest) -> UNMutableNotificationContent! {
         
+        if let stepNumber = request.content.userInfo["step"] as? Int {
+            let newStepNumber = (stepNumber + 1)
+            let updatedContent = request.content.mutableCopy() as! UNMutableNotificationContent
+            
+            if newStepNumber >= pizzaSteps.count {
+                return nil
+            }
+            
+            if newStepNumber == pizzaSteps.count - 1 {
+                updatedContent.threadIdentifier = request.identifier
+            }
+            
+            updatedContent.body = pizzaSteps[stepNumber]
+            updatedContent.userInfo["step"] = newStepNumber
+            return updatedContent
+        }
+        return request.content as? UNMutableNotificationContent
     }
     
     //MARK: - Life Cycle
