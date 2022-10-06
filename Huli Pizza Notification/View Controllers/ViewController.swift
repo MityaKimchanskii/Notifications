@@ -31,6 +31,8 @@ class ViewController: UIViewController {
             content.body = "Time to make a pizza!"
             content.threadIdentifier = "scheduled"
             
+            content.categoryIdentifier = "snooze.category"
+            
             var dateComponents = Calendar.current.dateComponents([.hour, .minute, .second], from: Date())
             dateComponents.second = dateComponents.second! + 15
             
@@ -60,7 +62,9 @@ class ViewController: UIViewController {
             content.subtitle = "Pizza #\(self.pizzaNumber)"
             content.threadIdentifier = "make.pizza"
             
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10.0, repeats: false)
+            content.categoryIdentifier = "pizza.steps.category"
+            
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 7.0, repeats: false)
 //            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: true)
             
             let identifier = "message.pizza.\(self.pizzaNumber)"
