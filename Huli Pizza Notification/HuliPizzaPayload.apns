@@ -1,7 +1,14 @@
 {
     "aps":{
-        "alert":"Enter your message",
-        "badge":1,
-        "sound":"default"
+        "alert": {
+            "title":"Pizza Co.",
+            "body":"You are going to love this",
+            "subtitle":"Your order is almost ready"
+        },
+        "badge":42,
+        "sound":"default",
+        
+        "category": "snooze.category"
     }
+    "order":["Pizza", "Duke", "Hello"]
 }
