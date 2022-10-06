@@ -8,7 +8,9 @@
         "badge":42,
         "sound":"default",
         
-        "category": "snooze.category"
+        "category": "snooze.category",
+        "thread-id": "scheduled",
+        "mutable-content": 1
     }
     "order":["Pizza", "Duke", "Hello"]
 }
